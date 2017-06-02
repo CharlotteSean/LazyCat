@@ -1,7 +1,8 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
+ * LazyCat
+ * Created by hicoldcat
+ * Created on 2017/11/6  22:22
+ * https://github.com/hicoldcat/LazyCat.git
  */
 
 import React, { Component } from 'react';
