@@ -11,7 +11,7 @@ import {
 
 const { height, width } = Dimensions.get('window');
 
-export default class WelcomeScreen extends Component<{}> {
+export default class WelcomeScreen extends Component {
     render () {
         return (
             <View style={{flex: 1}}>

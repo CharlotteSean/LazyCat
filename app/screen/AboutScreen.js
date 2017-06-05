@@ -6,7 +6,7 @@ import {
   View
 } from 'react-native';
 
-export default class AboutScreen extends Component<{}> {
+export default class AboutScreen extends Component {
     render () {
         return (
             <Text>AboutScreen</Text>

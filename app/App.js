@@ -8,24 +8,23 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
 
-import LoginScreen from './screen/LoginScreen'
-import WelcomeScreen from './screen/WelcomeScreen'
+import LoginScreen from './screen/LoginScreen';
 
-export default class App extends Component<{}> {
+export default class App extends Component {
   render() {
     return (
         <View style={styles.container}>
-            {(Platform.OS === 'android') ? <WelcomeScreen/> : <LoginScreen/>}
+            {(Platform.OS === 'android') ? <LoginScreen /> : <LoginScreen />}
         </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#FFFFFF',
-  }
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#FFFFFF',
+    },
 });
