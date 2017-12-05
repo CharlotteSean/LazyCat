@@ -4,6 +4,7 @@ import {
     Text,
     View,
     ImageBackground,
+    Image,
     TextInput,
     Button,
     TouchableOpacity
@@ -20,20 +21,26 @@ export default class LoginScreen extends Component {
             userName:'',
             passWord:'',
         };
+        this._onLogin = this._onLogin.bind(this);
     }
 
-    _onLogin () {
+    _onLogin() {
+        fetch('https://www.easy-mock.com/mock/5a1b898afc9bad5c3ee51403/lazycat/login',{
+            method: "POST"
+        }).then((res) => {
 
+        })
     }
 
     render() {
+        console.log(getWidthByPercent(100))
         return (
             <View style={styles.container}>
                 <ImageBackground source={require('../assets/images/welcome_bg1.jpeg')} style={styles.loginBgImg}>
 
                     {/* 标题 */}
                     <View style={styles.titleContainer}>
-                        <Text style={[baseStyle.baseText, styles.titleContent]}>LOGO</Text>
+                        <Image source={require('../assets/images/logo.png')} style={styles.logoImg} />
                     </View>
 
                     {/* 登陆项 */}
@@ -89,10 +96,12 @@ const styles = StyleSheet.create({
     },
     titleContainer: {
         marginTop:getHeightByPercent(10),
+        justifyContent:'center',
+        flexDirection:'row'
     },
-    titleContent: {
-        textAlign:"center",
-        fontSize:50,
+    logoImg:{
+        width: 100,
+        height: 100,
     },
     loginContainer: {
         width:getWidthByPercent(100),
@@ -108,7 +117,7 @@ const styles = StyleSheet.create({
         fontSize:18,
     },
     userName: {
-        marginTop:getHeightByPercent(35)
+        marginTop:getHeightByPercent(25)
     },
     passWord: {
         marginTop:getHeightByPercent(2)
@@ -117,14 +126,13 @@ const styles = StyleSheet.create({
         width:getWidthByPercent(80),
         height: 40,
         marginTop:getHeightByPercent(5),
-        backgroundColor:'#4C9FF8',
+        backgroundColor:'#409EFF',
         alignItems:'center',
         justifyContent:'center',
         flexDirection:'row',
     },
     button: {
         textAlign:'center',
-
     },
     accountContainer: {
         width:getWidthByPercent(100),
