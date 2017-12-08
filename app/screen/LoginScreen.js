@@ -9,12 +9,19 @@ import {
     Button,
     TouchableOpacity
 } from 'react-native';
+import {observer} from 'mobx-react/native';
+
 
 import {baseStyle} from '../assets/style/baseStyle'
 import {getWidthByPercent, getHeightByPercent} from '../assets/uitl/baseTool'
+import MainStore from '../store/MainStore';
 
-
+@observer
 export default class LoginScreen extends Component {
+    static defaultProps = {
+        store: MainStore
+    };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -25,15 +32,16 @@ export default class LoginScreen extends Component {
     }
 
     _onLogin() {
-        fetch('https://www.easy-mock.com/mock/5a1b898afc9bad5c3ee51403/lazycat/login',{
-            method: "POST"
-        }).then((res) => {
+        console.log(this.props.store.addUser({name:"ll"}))
+        // fetch('https://www.easy-mock.com/mock/5a1b898afc9bad5c3ee51403/lazycat/login',{
+        //     method: "POST"
+        // }).then((res) => {
+        //
+        // })
 
-        })
     }
 
     render() {
-        console.log(getWidthByPercent(100))
         return (
             <View style={styles.container}>
                 <ImageBackground source={require('../assets/images/welcome_bg1.jpeg')} style={styles.loginBgImg}>
@@ -41,6 +49,16 @@ export default class LoginScreen extends Component {
                     {/* 标题 */}
                     <View style={styles.titleContainer}>
                         <Image source={require('../assets/images/logo.png')} style={styles.logoImg} />
+                    </View>
+
+                    <Text style={{color:'#ffffff'}}>{this.props.store.userName}</Text>
+
+                    <View>
+                        {
+                            this.props.store.users.map((user,index) => (
+                                <Text style={{color:'#ffffff'}} key={index}>{user.name}</Text>
+                            ))
+                        }
                     </View>
 
                     {/* 登陆项 */}
