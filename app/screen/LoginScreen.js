@@ -32,12 +32,19 @@ export default class LoginScreen extends Component {
     }
 
     _onLogin() {
-        console.log(this.props.store.addUser({name:"ll"}))
-        // fetch('https://www.easy-mock.com/mock/5a1b898afc9bad5c3ee51403/lazycat/login',{
-        //     method: "POST"
-        // }).then((res) => {
-        //
-        // })
+        fetch(this.props.store.root + 'login',{
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                firstParam: 'yourValue',
+                secondParam: 'yourOtherValue',
+            })
+        }).then((res) => {
+            console.log(res._bodyInit.json())
+        })
 
     }
 
@@ -49,16 +56,6 @@ export default class LoginScreen extends Component {
                     {/* 标题 */}
                     <View style={styles.titleContainer}>
                         <Image source={require('../assets/images/logo.png')} style={styles.logoImg} />
-                    </View>
-
-                    <Text style={{color:'#ffffff'}}>{this.props.store.userName}</Text>
-
-                    <View>
-                        {
-                            this.props.store.users.map((user,index) => (
-                                <Text style={{color:'#ffffff'}} key={index}>{user.name}</Text>
-                            ))
-                        }
                     </View>
 
                     {/* 登陆项 */}
