@@ -9,12 +9,14 @@ import {
     Button,
     TouchableOpacity
 } from 'react-native';
-import {observer} from 'mobx-react/native';
-
+import {observer} from 'mobx-react';
+import { observable, action } from "mobx";
 
 import {baseStyle} from '../assets/style/baseStyle'
-import {getWidthByPercent, getHeightByPercent} from '../assets/uitl/baseTool'
+import {getWidthByPercent, getHeightByPercent} from '../utils/baseTool'
 import MainStore from '../store/MainStore';
+
+import LoginComponent from '../modules/login/components/LoginComponent'
 
 @observer
 export default class LoginScreen extends Component {
@@ -25,27 +27,11 @@ export default class LoginScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userName:'',
-            passWord:'',
-        };
-        this._onLogin = this._onLogin.bind(this);
-    }
-
-    _onLogin() {
-        fetch(this.props.store.root + 'login',{
-            method: "POST",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
+            userInfo:{
+                userName:'',
+                passWord:'',
             },
-            body: JSON.stringify({
-                firstParam: 'yourValue',
-                secondParam: 'yourOtherValue',
-            })
-        }).then((res) => {
-            console.log(res._bodyInit.json())
-        })
-
+        };
     }
 
     render() {
@@ -58,36 +44,11 @@ export default class LoginScreen extends Component {
                         <Image source={require('../assets/images/logo.png')} style={styles.logoImg} />
                     </View>
 
-                    {/* 登陆项 */}
-                    <View style={styles.loginContainer}>
-                        <TextInput
-                            style={[baseStyle.baseText,styles.loginItem,styles.userName]}
-                            onChangeText={(text) => this.setState({userName:text})}
-                            placeholder='用户名'
-                            placeholderTextColor='#ffffff'
-                            underlineColorAndroid="transparent"
-                            blurOnSubmit={true}
-                            value={this.state.userName}>
-                        </TextInput>
-                        <TextInput
-                            style={[baseStyle.baseText,styles.loginItem,styles.passWord]}
-                            onChangeText={(text) => this.setState({passWord:text})}
-                            secureTextEntry={true}
-                            placeholder='密码'
-                            placeholderTextColor='#ffffff'
-                            underlineColorAndroid="transparent"
-                            blurOnSubmit={true}
-                            inlineImageLeft='../assets/images/welcome_bg1.jpeg'
-                            value={this.state.passWord}>
-                        </TextInput>
-                        <TouchableOpacity onPress={this._onLogin} style={styles.loginBtn} activeOpacity={0.9}>
-                            <Text style={[baseStyle.baseText,styles.button]}>登录</Text>
-                        </TouchableOpacity>
-                    </View>
+                    <LoginComponent userInfo={this.state.userInfo}/>
 
                     {/* 注册账号和忘记密码 */}
                     <View style={styles.accountContainer}>
-                        <Text style={baseStyle.basePromptText}>注册账号</Text>
+                        <Text style={baseStyle.basePromptText} onPress={this.handleFormSubmit}>注册账号</Text>
                         <Text style={baseStyle.basePromptText}>忘记密码</Text>
                     </View>
 
@@ -95,6 +56,7 @@ export default class LoginScreen extends Component {
             </View>
         );
     }
+
 }
 
 const styles = StyleSheet.create({
@@ -117,37 +79,6 @@ const styles = StyleSheet.create({
     logoImg:{
         width: 100,
         height: 100,
-    },
-    loginContainer: {
-        width:getWidthByPercent(100),
-        justifyContent:'center',
-        alignItems:'center',
-    },
-    loginItem: {
-        height: 40,
-        width:getWidthByPercent(80),
-        borderBottomWidth:1,
-        borderColor:'#FFFFFF',
-        padding: 10,
-        fontSize:18,
-    },
-    userName: {
-        marginTop:getHeightByPercent(25)
-    },
-    passWord: {
-        marginTop:getHeightByPercent(2)
-    },
-    loginBtn: {
-        width:getWidthByPercent(80),
-        height: 40,
-        marginTop:getHeightByPercent(5),
-        backgroundColor:'#409EFF',
-        alignItems:'center',
-        justifyContent:'center',
-        flexDirection:'row',
-    },
-    button: {
-        textAlign:'center',
     },
     accountContainer: {
         width:getWidthByPercent(100),
