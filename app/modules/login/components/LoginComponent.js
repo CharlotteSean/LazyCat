@@ -7,47 +7,64 @@ import {
     TouchableOpacity
 } from 'react-native';
 import PropTypes from 'prop-types';
+import { Button,Toast} from 'antd-mobile';
 
 import {baseStyle} from '../../../assets/style/baseStyle';
 import {getWidthByPercent, getHeightByPercent} from '../../../utils/baseTool'
+
+import RootStore from '../../../store/RootStore'
 
 export default class LoginComponent extends Component {
 
     static propTypes = {
         userInfo: PropTypes.object,
+        handleSetState:PropTypes.func
     };
 
     constructor(props) {
         super(props);
-        this.state = {
-            userName:'',
-            passWord:'',
-        };
-        this._onLogin = this._onLogin.bind(this);
     }
 
-    _onLogin = () => {
-        fetch('https://www.easy-mock.com/mock/5a1b898afc9bad5c3ee51403/lazycat/hello',{ mode: 'cors'}).then((res) => {
-            console.log(res)
+    onLogin = () => {
+        fetch(RootStore.apiUrl('login'),{
+            method:'POST',
+            headers:{
+                "Accept": "application/json",
+               'Content-Type': 'application/json'
+            },
+            body:JSON.stringify({
+                "userName":this.props.userInfo.userName,
+                "passWord":this.props.userInfo.passWord
+            })
+        })
+        .then((response) => {return response.json()})
+        .then((res) => {
+            if (res.success) {
+                Toast.info("欢迎你："+res.data.userInfo.userName,2);
+            }else {
+                Toast.fail(res.msg,2);
+            }
+        })
+        .catch((err) => {
+            console.log(err);
         })
 
+    }
 
-        // fetch(this.props.store.root + 'login', {
-        //     method: 'POST',
-        //     mode:'cors',
-        //     headers:new Headers({
-        //         'Content-Type': 'application/json; charset=utf-8',
-        //         'Access-Control-Allow-Origin': null,
-        //         'Access-Control-Allow-Credentials': true,
-        //         'Accept':'*/*',
-        //         'Host':'www.easy-mock.com'
-        //     })
-        // }).then((response) => {
-        //         if (response.ok) {
-        //             console.log(response)
-        //         }
-        //     })
+    onChangeUserName =  (userName) => {
+        this.props.handleSetState({
+            userInfo:Object.assign(this.props.userInfo,{
+                userName:userName
+            })
+        } )
+    }
 
+    onChangePassword = (passWord) => {
+        this.props.handleSetState({
+            userInfo:Object.assign(this.props.userInfo,{
+                passWord:passWord
+            })
+        })
     }
 
     render () {
@@ -55,27 +72,26 @@ export default class LoginComponent extends Component {
             <View style={styles.loginContainer}>
                 <TextInput
                     style={[baseStyle.baseText,styles.loginItem,styles.userName]}
-                    onChangeText={(text) => this.setState({userName:text})}
+                    onChangeText={(userName) => this.onChangeUserName(userName)}
                     placeholder='用户名'
                     placeholderTextColor='#ffffff'
                     underlineColorAndroid="transparent"
                     blurOnSubmit={true}
-                    value={this.state.userName}>
+                    value={this.props.userInfo.userName}>
                 </TextInput>
                 <TextInput
                     style={[baseStyle.baseText,styles.loginItem,styles.passWord]}
-                    onChangeText={(text) => this.setState({passWord:text})}
+                    onChangeText={(passWord) => this.onChangePassword(passWord)}
                     secureTextEntry={true}
                     placeholder='密码'
                     placeholderTextColor='#ffffff'
                     underlineColorAndroid="transparent"
                     blurOnSubmit={true}
-                    inlineImageLeft='../../../assets/images/welcome_bg1.jpeg'
-                    value={this.state.passWord}>
+                    value={this.props.userInfo.passWord}>
                 </TextInput>
-                <TouchableOpacity onPress={this._onLogin} style={styles.loginBtn} activeOpacity={0.9}>
-                    <Text style={[baseStyle.baseText,styles.button]}>登录</Text>
-                </TouchableOpacity>
+                <Button type="primary" style={styles.loginBtn} onClick={this.onLogin}>
+                    登录
+                </Button>
             </View>
         )
     }
@@ -106,8 +122,6 @@ const styles = StyleSheet.create({
         height: 40,
         marginTop:getHeightByPercent(5),
         backgroundColor:'#409EFF',
-        alignItems:'center',
-        justifyContent:'center',
-        flexDirection:'row',
+        borderWidth:0
     },
 })

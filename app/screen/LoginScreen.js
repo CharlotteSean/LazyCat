@@ -9,19 +9,18 @@ import {
     Button,
     TouchableOpacity
 } from 'react-native';
-import {observer} from 'mobx-react';
-import { observable, action } from "mobx";
+// import {observer} from 'mobx-react';
+// import { observable, action } from "mobx";
 
 import {baseStyle} from '../assets/style/baseStyle'
 import {getWidthByPercent, getHeightByPercent} from '../utils/baseTool'
-import MainStore from '../store/MainStore';
 
 import LoginComponent from '../modules/login/components/LoginComponent'
 
-@observer
+// @observer
 export default class LoginScreen extends Component {
     static defaultProps = {
-        store: MainStore
+
     };
 
     constructor(props) {
@@ -32,6 +31,7 @@ export default class LoginScreen extends Component {
                 passWord:'',
             },
         };
+        this.setState = this.setState.bind(this);
     }
 
     render() {
@@ -44,7 +44,8 @@ export default class LoginScreen extends Component {
                         <Image source={require('../assets/images/logo.png')} style={styles.logoImg} />
                     </View>
 
-                    <LoginComponent userInfo={this.state.userInfo}/>
+                    {/* 登录组件 */}
+                    <LoginComponent userInfo={this.state.userInfo} handleSetState={this.setState}/>
 
                     {/* 注册账号和忘记密码 */}
                     <View style={styles.accountContainer}>
