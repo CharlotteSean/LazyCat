@@ -1,17 +1,46 @@
-import {
-    StackNavigator
-} from 'react-navigation';
-
+import React, {Component} from 'react';
 import LoginScreen from '../screen/LoginScreen';
-import ForgetPasswordScreen from '../screen/ForgetPasswordScreen'
+import ForgetPasswordScreen from '../screen/ForgetPasswordScreen';
+import AccountRegisterScreen from '../screen/AccountRegisterScreen';
+import WelcomeScreen from '../screen/WelcomeScreen';
 
+export const RouteConfigs = {
+    WelcomeScreen: {
+        screen: WelcomeScreen
+    },
+    ForgetPasswordScreen: {
+        screen: ForgetPasswordScreen
+    },
+    LoginScreen: {
+        screen: LoginScreen
+    }
+}
 
-//进行导航的注册
-const ScreenApp = StackNavigator({
-  Login: { screen: LoginScreen },
-  ForgetPassword:{ screen: ForgetPasswordScreen }
-});
+export const RouteNavigatorConfig = {
+    initialRouteName: 'WelcomeScreen',
+    navigationOptions: {
+        headerStyle: {
+            backgroundColor: '#f4511e'
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+            fontWeight: 'bold'
+        }
+    }
+}
 
-AppRegistry.registerComponent('ScreenApp', () => ScreenApp);
+export const LoginConfig = {
+    LoginScreen: {
+        screen: LoginScreen
+    },
+    ForgetPasswordScreen: {
+        screen: ForgetPasswordScreen
+    },
+    AccountRegisterScreen: {
+        screen: AccountRegisterScreen
+    },
+}
 
-export default ScreenApp;
+export const LoginNavigatorConfig = {
+    initialRouteName: 'LoginScreen'
+}

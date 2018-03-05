@@ -19,8 +19,9 @@ import LoginComponent from '../modules/login/components/LoginComponent'
 
 // @observer
 export default class LoginScreen extends Component {
-    static defaultProps = {
 
+    static navigationOptions = {
+        header: null
     };
 
     constructor(props) {
@@ -49,8 +50,8 @@ export default class LoginScreen extends Component {
 
                     {/* 注册账号和忘记密码 */}
                     <View style={styles.accountContainer}>
-                        <Text style={baseStyle.basePromptText} onPress={this.handleFormSubmit}>注册账号</Text>
-                        <Text style={baseStyle.basePromptText}>忘记密码</Text>
+                        <Text style={baseStyle.basePromptText} onPress={() => this.props.navigation.navigate("AccountRegisterScreen")}>注册账号</Text>
+                        <Text style={baseStyle.basePromptText} onPress={() => this.props.navigation.navigate("ForgetPasswordScreen")}>忘记密码</Text>
                     </View>
 
                 </ImageBackground>

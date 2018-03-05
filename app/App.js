@@ -5,19 +5,36 @@
  * https://github.com/hicoldcat/LazyCat.git
  */
 
-import React, { Component } from 'react';
-import { Platform, StyleSheet, View } from 'react-native';
+import React, {Component} from 'react';
+import {Platform, StyleSheet, View} from 'react-native';
+import {SafeAreaView,StackNavigator} from 'react-navigation';
+import {RouteConfigs, RouteNavigatorConfig,LoginConfig,LoginNavigatorConfig} from './config/routeConfig';
+import {
+    Provider,
+    observer
+} from 'mobx-react';
 
-import LoginScreen from './screen/LoginScreen';
+import RootStore from './store/RootStore';
+const RootStack = StackNavigator(RouteConfigs, RouteNavigatorConfig);
+const LoginStack = StackNavigator(LoginConfig, LoginNavigatorConfig);
 
+@observer
 export default class App extends Component {
-  render() {
-    return (
-        <View style={styles.container}>
-            {(Platform.OS === 'android') ? <LoginScreen /> : <LoginScreen />}
-        </View>
-    );
-  }
+    render() {
+        if (RootStore.isLogin) {
+            return (
+                <Provider store={RootStore}>
+                    <RootStack/>
+                </Provider>
+            )
+        } else {
+            return (
+                <Provider store={RootStore}>
+                    <LoginStack/>
+                </Provider>
+            );
+        }
+    }
 }
 
 const styles = StyleSheet.create({
@@ -25,6 +42,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#FFFFFF',
-    },
+        backgroundColor: '#FFFFFF'
+    }
 });

@@ -20,7 +20,7 @@ export default class ForgetPasswordView extends Component {
         headerStyle: {
             backgroundColor: "#409EFF"
         },
-        headerTitle:'找回密码',
+        headerTitle:'注册账号',
         headerTintColor: '#fff',
         headerTitleStyle: {
             fontWeight: 'bold'
@@ -29,7 +29,7 @@ export default class ForgetPasswordView extends Component {
 
     render () {
         return (
-            <Text>这是忘记密码页面</Text>
+            <Text>这是注册账号页面</Text>
         )
     }
 }

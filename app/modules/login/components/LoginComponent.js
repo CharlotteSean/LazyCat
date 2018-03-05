@@ -40,6 +40,7 @@ export default class LoginComponent extends Component {
         .then((response) => {return response.json()})
         .then((res) => {
             if (res.success) {
+                RootStore.isLogin = true;
                 Toast.info("欢迎你："+res.data.userInfo.userName,2);
             }else {
                 Toast.fail(res.msg,2);
