@@ -26,6 +26,14 @@ export default class LoginComponent extends Component {
     }
 
     onLogin = () => {
+        if (this.props.userInfo.userName == '') {
+            Toast.info("用户名不能为空",2);
+            return;
+        }else if (this.props.userInfo.passWord == '') {
+            Toast.info("密码不能为空",2);
+            return;
+        }
+
         fetch(RootStore.apiUrl('login'),{
             method:'POST',
             headers:{
@@ -41,7 +49,7 @@ export default class LoginComponent extends Component {
         .then((res) => {
             if (res.success) {
                 RootStore.isLogin = true;
-                Toast.info("欢迎你："+res.data.userInfo.userName,2);
+                Toast.success("欢迎你："+res.data.userInfo.userName,2);
             }else {
                 Toast.fail(res.msg,2);
             }

@@ -7,16 +7,17 @@
 
 import React, {Component} from 'react';
 import {Platform, StyleSheet, View} from 'react-native';
-import {SafeAreaView,StackNavigator} from 'react-navigation';
-import {RouteConfigs, RouteNavigatorConfig,LoginConfig,LoginNavigatorConfig} from './config/routeConfig';
+import {SafeAreaView,StackNavigator,DrawerNavigator} from 'react-navigation';
+import {StackRouteConfigs, StackNavigatorConfig, DrawerRouteConfigs, DrawerNavigatorConfig, LoginRouteConfigs, LoginNavigatorConfig} from './config/routeConfig';
 import {
     Provider,
     observer
 } from 'mobx-react';
 
 import RootStore from './store/RootStore';
-const RootStack = StackNavigator(RouteConfigs, RouteNavigatorConfig);
-const LoginStack = StackNavigator(LoginConfig, LoginNavigatorConfig);
+// const RootStack = StackNavigator(StackRouteConfigs, StackNavigatorConfig);
+const LoginStack = StackNavigator(LoginRouteConfigs, LoginNavigatorConfig);
+const RootStack = DrawerNavigator(DrawerRouteConfigs, DrawerNavigatorConfig)
 
 @observer
 export default class App extends Component {

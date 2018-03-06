@@ -5,7 +5,7 @@ class RootStore {
     @observable MainColor = '#409EFF';
 
     @observable rootUrl = 'https://www.easy-mock.com/mock/5a1b898afc9bad5c3ee51403/lazycat/';
-    @observable isLogin = false;
+    @observable isLogin = true;
 
     apiUrl (apiKey) {
         return this.rootUrl + Api[apiKey];

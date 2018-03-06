@@ -50,8 +50,8 @@ export default class LoginScreen extends Component {
 
                     {/* 注册账号和忘记密码 */}
                     <View style={styles.accountContainer}>
-                        <Text style={baseStyle.basePromptText} onPress={() => this.props.navigation.navigate("AccountRegisterScreen")}>注册账号</Text>
-                        <Text style={baseStyle.basePromptText} onPress={() => this.props.navigation.navigate("ForgetPasswordScreen")}>忘记密码</Text>
+                        <Text style={baseStyle.basePromptText} onPress={() => this.props.navigation.navigate("AccountRegister")}>注册账号</Text>
+                        <Text style={baseStyle.basePromptText} onPress={() => this.props.navigation.navigate("ForgetPassword")}>忘记密码</Text>
                     </View>
 
                 </ImageBackground>
