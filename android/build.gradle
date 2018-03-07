@@ -22,15 +22,3 @@ allprojects {
         }
     }
 }
-
-android {
-    // make sure to use 23.0.3 instead of 23.0.1
-    buildToolsVersion '23.0.3'
-
-    // ...
-    defaultConfig {
-        // Add these lines below the existing config
-        renderscriptTargetApi 23
-        renderscriptSupportModeEnabled true
-    }
-}
