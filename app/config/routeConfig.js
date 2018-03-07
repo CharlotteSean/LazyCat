@@ -26,11 +26,8 @@ export const StackNavigatorConfig = {
 
 // DrawerNavigator RouteConfigs
 export const DrawerRouteConfigs = {
-    Home: {
+    Index: {
         screen: StackNavigator(StackRouteConfigs, StackNavigatorConfig)
-    },
-    About: {
-        screen: AboutScreen
     }
 }
 
@@ -38,7 +35,7 @@ export const DrawerRouteConfigs = {
 export const DrawerNavigatorConfig = {
     drawerWidth:200,
     drawerPosition:'left',
-    drawerBackgroundColor:'#409EFF',
+    drawerBackgroundColor:'transparent',
     contentComponent:SideBar
 }
 

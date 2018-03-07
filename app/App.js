@@ -15,7 +15,7 @@ import {
 } from 'mobx-react';
 
 import RootStore from './store/RootStore';
-// const RootStack = StackNavigator(StackRouteConfigs, StackNavigatorConfig);
+
 const LoginStack = StackNavigator(LoginRouteConfigs, LoginNavigatorConfig);
 const RootStack = DrawerNavigator(DrawerRouteConfigs, DrawerNavigatorConfig)
 
@@ -24,13 +24,13 @@ export default class App extends Component {
     render() {
         if (RootStore.isLogin) {
             return (
-                <Provider store={RootStore}>
+                <Provider {...RootStore}>
                     <RootStack/>
                 </Provider>
             )
         } else {
             return (
-                <Provider store={RootStore}>
+                <Provider {...RootStore}>
                     <LoginStack/>
                 </Provider>
             );

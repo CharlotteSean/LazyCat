@@ -1,6 +1,6 @@
 import {observable,action} from 'mobx'
 
-class LoginStore {
+export default class LoginStore {
     @observable userName = '';
     @observable passWord = '';
 
@@ -10,5 +10,3 @@ class LoginStore {
     }
 
 }
-
-export default new LoginStore()
