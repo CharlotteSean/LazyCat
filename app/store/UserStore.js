@@ -1,6 +1,10 @@
 import {observable, action, computed} from 'mobx';
 class UserStore {
 
+    constructor(rootStore) {
+        this.rootStore = rootStore
+    }
+
     // 用户信息
     @observable userInfo = {
         userName:'',

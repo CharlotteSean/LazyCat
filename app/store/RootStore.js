@@ -17,7 +17,7 @@ class RootStore {
     loginStore: LoginStore;
 
     @observable rootUrl = 'https://www.easy-mock.com/mock/5a1b898afc9bad5c3ee51403/lazycat/';
-    @observable isLogin = true;
+    @observable isLogin = false;
 
     constructor() {
         this.userStore =  new UserStore(this);

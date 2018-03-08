@@ -12,8 +12,9 @@ import { Button,Toast} from 'antd-mobile';
 import {baseStyle} from '../../../assets/style/baseStyle';
 import {getWidthByPercent, getHeightByPercent} from '../../../utils/baseTool'
 
-import RootStore from '../../../store/RootStore'
+import {observer, inject} from 'mobx-react';
 
+@inject('loginStore')
 export default class LoginComponent extends Component {
 
     static propTypes = {
@@ -26,6 +27,7 @@ export default class LoginComponent extends Component {
     }
 
     onLogin = () => {
+        console.log(this.props);
         if (this.props.userInfo.userName == '') {
             Toast.info("用户名不能为空",2);
             return;
@@ -34,7 +36,7 @@ export default class LoginComponent extends Component {
             return;
         }
 
-        fetch(RootStore.apiUrl('login'),{
+        fetch(this.props.loginStore.rootStore.apiUrl('login'),{
             method:'POST',
             headers:{
                 "Accept": "application/json",
@@ -48,7 +50,7 @@ export default class LoginComponent extends Component {
         .then((response) => {return response.json()})
         .then((res) => {
             if (res.success) {
-                RootStore.isLogin = true;
+                this.props.loginStore.rootStore.isLogin = true;
                 Toast.success("欢迎你："+res.data.userInfo.userName,2);
             }else {
                 Toast.fail(res.msg,2);
@@ -98,9 +100,7 @@ export default class LoginComponent extends Component {
                     blurOnSubmit={true}
                     value={this.props.userInfo.passWord}>
                 </TextInput>
-                <Button type="primary" style={styles.loginBtn} onClick={this.onLogin}>
-                    登录
-                </Button>
+                <Button type="primary" style={styles.loginBtn} onClick={this.onLogin}>登录</Button>
             </View>
         )
     }
