@@ -7,4 +7,6 @@ export default  class ThemeStore {
     }
 
     @observable MainColor = '#409EFF';
+
+    @observable PlaceholderTextColor = '#000000';
 }

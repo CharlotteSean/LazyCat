@@ -9,6 +9,7 @@ import {
     Button,
     TouchableOpacity
 } from 'react-native';
+import Video from 'react-native-video';
 // import {observer} from 'mobx-react';
 // import { observable, action } from "mobx";
 
@@ -16,6 +17,7 @@ import {baseStyle} from '../assets/style/baseStyle'
 import {getWidthByPercent, getHeightByPercent} from '../utils/baseTool'
 
 import LoginComponent from '../modules/login/components/LoginComponent'
+import LogoView from '../components/LogoView.js'
 
 // @observer
 export default class LoginScreen extends Component {
@@ -40,10 +42,10 @@ export default class LoginScreen extends Component {
             <View style={styles.container}>
                 <ImageBackground source={require('../assets/images/welcome_bg1.jpeg')} style={styles.loginBgImg}>
 
-                    {/* 标题 */}
-                    <View style={styles.titleContainer}>
-                        <Image source={require('../assets/images/logo.png')} style={styles.logoImg} />
-                    </View>
+                    <Video source={require('../assets/media/bgvideo_sea.mp4')} rate={0.4}  style={styles.fullScreen} repeat={true}  resizeMode="cover"></Video>
+
+                    {/* 标题LOGO */}
+                    <LogoView></LogoView>
 
                     {/* 登录组件 */}
                     <LoginComponent userInfo={this.state.userInfo} handleSetState={this.setState}/>
@@ -90,5 +92,13 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         paddingLeft:getWidthByPercent(10),
         paddingRight:getWidthByPercent(10),
+    },
+    fullScreen: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0,
+        opacity:0.5
     },
 })

@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     loginItem: {
         height: 40,
         width:getWidthByPercent(80),
-        borderBottomWidth:1,
+        borderBottomWidth:2,
         borderColor:'#FFFFFF',
         padding: 10,
         fontSize:18,
